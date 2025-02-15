@@ -78,11 +78,20 @@ public class RobotContainer {
       // Turning is controlled by the X axis of the right stick.
         new RunCommand(
           () -> {
-            m_robotDrive.drive(
+            if (m_driverController.getRawButton(OIConstants.kRightBumper)) {
+              m_robotDrive.drive(
+                getXSpeedInput()/2,
+                getYSpeedInput()/2,
+                getRotationSpeedInput()/2,
+                true);
+            }
+            else {
+              m_robotDrive.drive(
               getXSpeedInput(),
               getYSpeedInput(),
               getRotationSpeedInput(),
               true);
+            }
           }, m_robotDrive
         )
       );
